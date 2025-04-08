@@ -5,28 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Luffy D. Surya | Future Pirate King</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
       background: #001f3f;
       color: #f8f8f2;
       font-family: 'Trebuchet MS', sans-serif;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      overflow: hidden;
+      padding-top: 40px;
+      min-height: 100vh;
     }
 
     .flag {
-      font-size: 6rem;
+      font-size: 5rem;
       animation: wave 2s infinite ease-in-out;
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
       margin: 1rem 0;
       color: #ffdd57;
     }
@@ -34,18 +41,17 @@
     p {
       font-size: 1.2rem;
       max-width: 600px;
-      margin: 0 20px;
+      margin: 0 20px 1.5rem;
     }
 
     .quote {
       font-style: italic;
-      margin-top: 2rem;
       color: #ffae42;
+      margin-bottom: 1rem;
     }
 
     footer {
-      position: absolute;
-      bottom: 20px;
+      padding: 1rem;
       font-size: 0.9rem;
       color: #aaa;
     }
@@ -56,27 +62,158 @@
     }
 
     .strawhat {
-      width: 520px;
-      margin-bottom: 1rem;
+      width: 250px;
       animation: float 3s ease-in-out infinite;
-    
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
-    
+
+    .meat-btn {
+      background-color: #ff6347;
+      color: #fff;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.4rem;
+      border-radius: 50px;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+      box-shadow: 0 0 15px rgba(255, 99, 71, 0.6);
+    }
+
+    .meat-btn:hover {
+      transform: scale(1.05) rotate(-2deg);
+    }
+
+    .ai-box {
+      margin-top: 1rem;
+      background-color: #003366;
+      padding: 1rem;
+      border-radius: 12px;
+      width: 300px;
+      max-width: 90%;
+      font-style: italic;
+      border: 2px dashed #ffae42;
+      display: none;
+    }
+
+    .meat {
+      position: absolute;
+      top: -50px;
+      font-size: 2rem;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+
+    .wanted-box {
+      margin-top: 2rem;
+      background-color: #002f4f;
+      padding: 1rem;
+      border-radius: 10px;
+      width: 300px;
+      max-width: 90%;
+    }
+
+    .wanted-box input {
+      padding: 0.5rem;
+      width: 100%;
+      margin-bottom: 0.5rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .wanted-box button {
+      background-color: #ffae42;
+      color: #001f3f;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .wanted-poster {
+      margin-top: 1rem;
+      font-family: 'Courier New', Courier, monospace;
+      background: #fff8dc;
+      color: #000;
+      padding: 1rem;
+      border: 2px solid #000;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
-  <img class="strawhat" src="pngegg (1).png" alt="Straw Hat Logo">
-  <div class="flag">🏴‍☠️</div>
-  <h1>I'm Luffy D. Surya</h1>
-  <p>Captain of my own coding crew. Sailing the digital seas, looking for the ultimate treasure — knowledge, growth, and good vibes.</p>
+  <div class="container">
+    <img class="strawhat" src="pngegg (1).png" alt="Straw Hat Logo">
+    <div class="flag">🏴‍☠️</div>
+    <h1>I'm Luffy D. Surya</h1>
+    <p>Captain of my own coding crew. Sailing the digital seas, looking for the ultimate treasure — knowledge, growth, and good vibes.</p>
+    <div class="quote">"I'm gonna be the King of the Coders!" 👑</div>
 
-  <div class="quote">"I'm gonna be the King of the Coders!" 👑</div>
+    <button class="meat-btn" onclick="summonLuffy()">🍖 MEAT 🍖</button>
+    <div class="ai-box" id="aiBox"></div>
+
+    <div class="wanted-box">
+      <input type="text" id="nameInput" placeholder="Enter your name for bounty" />
+      <button onclick="createWantedPoster()">Generate WANTED Poster</button>
+      <div class="wanted-poster" id="posterBox" style="display: none;"></div>
+    </div>
+  </div>
 
   <footer>Made with 🍖 & ❤️ by Surya | Mugiwara no Kaizoku</footer>
+
+  <script>
+    const aiBox = document.getElementById('aiBox');
+    const luffyLines = [
+      "MEATTTTTTT!!!! 🍖🍖🍖",
+      "If you touch my meat, we fight 😤",
+      "Meat first. Code later.",
+      "I can smell meat... is it in your fridge?!",
+      "Zoro got lost again... but I found the meat!",
+      "Oi! Don't eat without me!",
+      "One Piece? Nah, I just want one more piece of MEAT!",
+      "This isn't AI... it's Luffy-ntelligence 😂"
+    ];
+
+    function summonLuffy() {
+      const line = luffyLines[Math.floor(Math.random() * luffyLines.length)];
+      aiBox.textContent = line;
+      aiBox.style.display = 'block';
+    }
+
+    function createWantedPoster() {
+      const name = document.getElementById("nameInput").value.trim();
+      if (!name) return alert("Type a name, nakama!");
+      const reward = Math.floor(Math.random() * 500000000) + 100000000;
+      const poster = `
+        <h3>WANTED</h3>
+        <p><strong>${name}</strong></p>
+        <p>Bounty: ${reward.toLocaleString()} Berries 💰</p>
+      `;
+      const box = document.getElementById("posterBox");
+      box.innerHTML = poster;
+      box.style.display = "block";
+    }
+
+    // Spawn flying meats
+    for (let i = 0; i < 15; i++) {
+      const meat = document.createElement('div');
+      meat.className = 'meat';
+      meat.textContent = '🍖';
+      meat.style.left = Math.random() * 100 + 'vw';
+      meat.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(meat);
+    }
+  </script>
 </body>
 </html>
