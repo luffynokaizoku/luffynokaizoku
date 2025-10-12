@@ -3,7 +3,7 @@
 **luffynokaizoku/luffynokaizoku** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 -->
 
-# 👒 Ahoy! I'm Surya — a.k.a **LuffyNoKaizoku** 🏴‍☠️
+# 👒 Ahoy! I'm Sure Sri Venkat Rama Surya — a.k.a **LuffyNoKaizoku** 🏴‍☠️
 
 🌊 Just a dev sailing the digital seas with dreams bigger than the Grand Line.  
 💻 Code is my Devil Fruit — powerful, wild, and full of surprises.  
